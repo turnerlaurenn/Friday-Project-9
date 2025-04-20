@@ -12,23 +12,36 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 def get_completion(prompt):
     try:
         response = openai.chat.completions.create(
-            model="gpt-3.5-turbo",  # or "gpt-4" if you have access
+            model="gpt-3.5-turbo",
             messages=[
                 {"role": "user", "content": prompt}
             ],
             max_tokens=500
         )
-        return response.choices[0].message.content.strip()
+        message = response.choices[0].message.content.strip()
+        
+        if len(message.split()) >= 500:
+            message += "\n\n(Note: Output may be truncated.)"
+        
+        return message
+
     except Exception as e:
         return f"Error: {str(e)}"
 
 # GUI setup
 def submit_prompt():
     prompt = input_box.get("1.0", tk.END).strip()
+    
     if not prompt:
         output_box.delete("1.0", tk.END)
         output_box.insert(tk.END, "Please enter a prompt.")
         return
+    
+    if len(prompt.split()) > 400:
+        output_box.delete("1.0", tk.END)
+        output_box.insert(tk.END, "Prompt too long. Please shorten it to under 400 words.")
+        return
+
     result = get_completion(prompt)
     output_box.delete("1.0", tk.END)
     output_box.insert(tk.END, result)
