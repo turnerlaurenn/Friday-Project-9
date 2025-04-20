@@ -37,12 +37,9 @@ Required packages:
 
 ### 3. Add Your OpenAI API Key
 
-1. Rename the `.env.example` file to `.env`  
-2. Open the `.env` file and paste your OpenAI API key:
-
-OPENAI_API_KEY=your_api_key_here
-
-You can get your API key from your OpenAI account dashboard: https://platform.openai.com/account/api-keys
+1. Rename `.env.example` to `.env`
+2. Get an OpenAI API key from https://platform.openai.com/account/api-keys
+3. Replace `your-api-key-here` with your actual key
 
 ---
 
