@@ -6,7 +6,12 @@ import os
 
 # Load API key
 load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
+api_key = os.getenv("OPENAI_API_KEY")
+
+if not api_key:
+    raise ValueError("Missing OpenAI API key. Please rename '.env.example' to '.env' and add your API key.")
+
+openai.api_key = api_key
 
 # Completion function
 def get_completion(prompt):
@@ -20,7 +25,7 @@ def get_completion(prompt):
         )
         message = response.choices[0].message.content.strip()
         
-        if len(message.split()) >= 500:
+        if len(message.split()) >= 490:
             message += "\n\n(Note: Output may be truncated.)"
         
         return message
