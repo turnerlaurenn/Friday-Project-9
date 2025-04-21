@@ -40,6 +40,7 @@ Required packages:
 1. Rename `.env.example` to `.env`
 2. Get an OpenAI API key from https://platform.openai.com/account/api-keys
 3. Replace `your-api-key-here` with your actual key
+- Make sure there are **no spaces** or **quotation marks** around the key.
 
 ---
 
